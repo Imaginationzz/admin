@@ -3,6 +3,7 @@ import "./topbar.css";
 import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/apiCalls";
+import { Link } from "react-router-dom";
 
 export default function Topbar() {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ export default function Topbar() {
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">YAZadmin</span>
+          <Link to="/">
+            <span className="logo">YAZadmin</span>
+          </Link>
         </div>
         <div className="topRight">
           <span
