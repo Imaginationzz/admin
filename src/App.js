@@ -28,8 +28,8 @@ function App() {
 
         <Routes>
           <Route path="/login" element={admin ? <Navigate to="/" /> : <Login />} />
-
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={admin ? <Home /> : <Navigate to="/login" />} />
+          {/* <Route path="/" element={<Home />} /> */}
           <Route path="/users" element={<UserList />} />
           <Route path="/user/:userId" element={<User />} />
           <Route path="/newUser" element={<NewUser />} />
