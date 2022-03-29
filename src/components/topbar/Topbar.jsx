@@ -21,14 +21,10 @@ export default function Topbar() {
           </Link>
         </div>
         <div className="topRight">
-          <span
-            onClick={handleLogout}
-            style={{
-              marginRight: "5px",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
+          <a href="https://yazfarm.herokuapp.com/">
+            <span className="alinks">Go to app</span>
+          </a>
+          <span onClick={handleLogout} className="alinks">
             Logout
           </span>
           <div className="topbarIconContainer">
