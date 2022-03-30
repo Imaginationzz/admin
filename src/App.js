@@ -19,7 +19,7 @@ import {
 } from "react-router-dom";
 function App() {
   const admin = useSelector((state) => state.user.currentUser?.isAdmin);
-  const token = useSelector((state) => state.user.currentUser.accessToken);
+  const token = useSelector((state) => state.user.currentUser?.accessToken);
   console.log(admin)
   console.log(token)
   return (
