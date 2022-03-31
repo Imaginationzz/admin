@@ -23,7 +23,7 @@ export default function NewProduct() {
     e.preventDefault();
     const fileName = new Date().getTime() + file?.name;
 
-    const product = { ...inputs, categories: cat, img: fileName };
+    const product = { ...inputs, categories: cat, img: file };
     addProduct(product, dispatch);
     console.log(product);
   };

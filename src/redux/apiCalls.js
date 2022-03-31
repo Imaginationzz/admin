@@ -21,6 +21,7 @@ export const login = async (dispatch, user) => {
     try {
         const res = await publicRequest.post("/auth/login", user);
         dispatch(loginSuccess(res.data));
+        localStorage.setItem('TOKEN', res.data.accessToken);
     } catch (err) {
         dispatch(loginFailure());
     }
@@ -62,37 +63,59 @@ export const updateProduct = async (id, product, dispatch) => {
         dispatch(updateProductFailure());
     }
 };
+// export const addProduct = async (product, dispatch) => {
+//     dispatch(addProductStart());
+
+//     console.log(product)
+
+//     try {
+
+//         let formData = new FormData()
+//         formData.append("title", product.title);
+//         formData.append("desc", product.desc);
+//         formData.append("img", product.img);
+//         formData.append("categories", product.categories);
+//         formData.append("size", product.size);
+//         formData.append("color", product.color);
+//         formData.append("price", product.price);
+//         formData.append("inStock", product.inStock);
+
+//         let requestOptions = {
+
+
+//             data: formData,
+//             redirect: 'follow'
+//         };
+
+//         console.log(product);
+//         console.log(formData);
+
+
+//         const { data } = await addProductRequest.post(`product`, requestOptions);
+//         console.log(data, "dddddd")
+//         dispatch(addProductSuccess(data));
+//     } catch (err) {
+//         dispatch(addProductFailure());
+//     }
+// };
 export const addProduct = async (product, dispatch) => {
-    dispatch(addProductStart());
+    const formData = new FormData();
 
+
+    formData.append("title", product.title);
+
+    formData.append("img", product.img);
     console.log(product)
-
-    try {
-
-        let formData = new FormData()
-        formData.append("title", product.title);
-        formData.append("desc", product.desc);
-        formData.append("img", product.img);
-        formData.append("categories", product.categories);
-        formData.append("size", product.size);
-        formData.append("color", product.color);
-        formData.append("price", product.price);
-        formData.append("inStock", product.inStock);
-
-        let requestOptions = {
-
-
-            body: formData,
-            redirect: 'follow'
-        };
-        console.log(product);
-        console.log(formData);
-
-
-        const { data } = await addProductRequest.post(`product`, requestOptions);
-        console.log(data, "dddddd")
-        dispatch(addProductSuccess(data));
-    } catch (err) {
-        dispatch(addProductFailure());
-    }
-};
+    const response = await fetch("https://yazfarm-be.herokuapp.com/api/product", {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(result => {
+            dispatch(addProductSuccess(result));;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    console.log(response)
+}
